@@ -471,7 +471,7 @@ CONTAINER_WEB_SERVER_VHOSTS=""
 CONTAINER_ADD_RANDOM_PORTS=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Add custom port -  [exter:inter] or [.all:exter:inter/[tcp,udp] [listen:exter:inter/[tcp,udp]] random:[inter]
-CONTAINER_ADD_CUSTOM_PORT=".all:80:80,.all:443:443,.all:10001:81"
+CONTAINER_ADD_CUSTOM_PORT=".all:80:80 .all:443:443 .all:10001:81"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Create a single port mapping [listen]:[externalPort/random]:[internalPort]
 CONTAINER_ADD_CUSTOM_SINGLE=""
