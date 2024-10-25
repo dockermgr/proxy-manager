@@ -251,7 +251,15 @@ __pre_docker_install_commands() {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Define any post-install scripts
 run_post_install() {
-
+  for port in 80 443 10001; do
+    if __cmd_exists ufw; then
+      ufw allow $port >/dev/null
+    elif __cmd_exists firewall-cmd; then
+      firewall-cmd --permanent --add-port=$port/tcp >/dev/null && firewall-cmd --reload >/dev/null
+    elif __cmd_exists iptables; then
+      iptables -I INPUT -p tcp -m tcp --dport $port -j ACCEPT >/dev/null && iptables save >/dev/null
+    fi
+  done
   return 0
 }
 #
