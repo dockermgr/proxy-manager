@@ -19,17 +19,17 @@ dockermgr update proxy-manager
 ## Install and run container
   
 ```shell
-mkdir -p "$HOME/.local/share/srv/docker/proxy-manager/rootfs"
+mkdir -p "$HOME/.local/share/srv/docker/proxy-manager/volumes"
 git clone "https://github.com/dockermgr/proxy-manager" "$HOME/.local/share/CasjaysDev/dockermgr/proxy-manager"
-cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/proxy-manager/rootfs/." "$HOME/.local/share/srv/docker/proxy-manager/rootfs/"
+cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/proxy-manager/volumes/." "$HOME/.local/share/srv/docker/proxy-manager/volumes/"
 docker run -d \
 --restart always \
 --privileged \
 --name casjaysdevdocker-proxy-manager \
 --hostname proxy-manager \
 -e TZ=${TIMEZONE:-America/New_York} \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/rootfs/data:/data:z" \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/rootfs/config:/config:z" \
+-v "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/volumes/data:/data:z" \
+-v "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/volumes/config:/config:z" \
 -p 80:80 \
 casjaysdevdocker/proxy-manager:latest
 ```
@@ -46,8 +46,8 @@ services:
       - TZ=America/New_York
       - HOSTNAME=proxy-manager
     volumes:
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/rootfs/data:/data:z"
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/rootfs/config:/config:z"
+      - "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/volumes/data:/data:z"
+      - "$HOME/.local/share/srv/docker/casjaysdevdocker-proxy-manager/volumes/config:/config:z"
     ports:
       - 80:80
     restart: always
